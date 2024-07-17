@@ -5,7 +5,12 @@ app = Flask(__name__)
 #Decorators to add a tag around text on web page.
 def make_bold(function):
     def wrapper():
-        return "<b>" + function() + "</b>"
+        text = function()
+        words = text.split(" ")
+
+        new_word = "<b>" + words[1] + "</b>"
+        new_text = words[0] + " " + new_word
+        return new_text
     return wrapper
 
 def make_emphasis(function):
@@ -32,7 +37,7 @@ def hello_world():
 @make_emphasis
 @make_underlined
 def bye():
-    return "Bye!"
+    return "Bye! " + "Hello!"
 
 
 #Creating variable paths and converting the path to a specified data type
